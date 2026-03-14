@@ -1,6 +1,6 @@
 # Cloud Resume — Azure Container Apps Deployment
 
-A full-stack resume site deployed on **Azure Container Apps**, migrated from AKS. Live at [https://resume-backend.icyground-8a4001f2.uaenorth.azurecontainerapps.io/](https://resume-backend.icyground-8a4001f2.uaenorth.azurecontainerapps.io/).
+A full-stack resume site deployed on **Azure Container Apps**, migrated from AKS. Live at [https://mohamedayman.work/](mohamedayman.work).
 
 ---
 
@@ -124,6 +124,3 @@ az containerapp create \
 | Container Apps Env      | resume-env                          | UAEnorth, linked to Log Analytics |
 | Container App           | resume-backend                      | Exposes backend API externally |
 | Log Analytics Workspace | resume-law                           | For container logs monitoring |
-
----
-
