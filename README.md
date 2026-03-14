@@ -103,3 +103,27 @@ az containerapp create \
 - HTTPS enabled via ACA external ingress
 
 - Rate limiting enforced at backend
+
+---
+
+## Environment Variables
+
+| Name          | Description                                |
+|---------------|--------------------------------------------|
+| DATABASE_URL  | PostgreSQL connection string (Supabase)   |
+| PORT          | Port number for the backend API            |
+| APP_NAME      | Application name displayed or logged       |
+
+---
+
+## Azure Resources
+
+| Resource Type           | Name / Identifier                  | Notes |
+|-------------------------|-----------------------------------|-------|
+| Resource Group          | resumeaca-rg                       |       |
+| Container Apps Env      | resume-env                          | UAEnorth, linked to Log Analytics |
+| Container App           | resume-backend                      | Exposes backend API externally |
+| Log Analytics Workspace | resume-law                           | For container logs monitoring |
+
+---
+
