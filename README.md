@@ -1,6 +1,6 @@
 # Cloud Resume — Azure Container Apps Deployment
 
-A full-stack resume site deployed on **Azure Container Apps**, migrated from AKS. Live at [https://mohamedayman.work/](mohamedayman.work).
+A full-stack resume site deployed on **Azure Container Apps**, migrated from AKS. Live at [mohamedayman.work](mohamedayman.work).
 
 ---
 
