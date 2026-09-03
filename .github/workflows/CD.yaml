@@ -45,12 +45,18 @@ jobs:
         run: |
           docker push ninazu00/resume-backend:${{ github.event.workflow_run.head_sha }}
 
+      - name: Update registry credentials
+        run: |
+          az containerapp registry set \
+            --name resume-backend \
+            --resource-group resumeaca-rg \
+            --server docker.io \
+            --username ${{ secrets.DOCKERHUB_USERNAME }} \
+            --password ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Deploy to Container App
         run: |
           az containerapp update \
             --name resume-backend \
             --resource-group resumeaca-rg \
-            --image docker.io/ninazu00/resume-backend:${{ github.event.workflow_run.head_sha }} \
-            --registry-server docker.io \
-            --registry-username ${{ secrets.DOCKERHUB_USERNAME }} \
-            --registry-password ${{ secrets.DOCKERHUB_TOKEN }}
+            --image docker.io/ninazu00/resume-backend:${{ github.event.workflow_run.head_sha }}
