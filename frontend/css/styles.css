@@ -149,6 +149,21 @@ nav {
 
 .visitor-count { font-weight: 700; font-size: 1rem; color: var(--gold-light); }
 
+/* Hero CV button */
+.hero-cv-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 28px;
+  padding: 13px 30px;
+  background: var(--gold);
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.2s, transform 0.2s;
+  animation: fadeDown 0.8s 0.6s ease both;
+}
+.hero-cv-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
 .hero-scroll {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -337,6 +352,52 @@ section {
   font-size: 0.78rem; color: #e07060; font-weight: 500;
 }
 
+/* ============ EXPERIENCE ============ */
+#experience { background: var(--navy2); }
+
+.exp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 36px 40px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.exp-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201,168,76,0.4);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+.exp-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(to bottom, var(--red), var(--gold));
+}
+.exp-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+}
+.exp-role { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--cream); }
+.exp-org { font-size: 0.82rem; color: var(--red-light); font-weight: 500; margin-top: 3px; }
+.exp-date {
+  font-size: 0.75rem; color: var(--gold); font-weight: 500;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+.exp-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.exp-items li {
+  font-size: 0.855rem; color: rgba(232,228,220,0.65);
+  line-height: 1.6; padding-left: 18px; position: relative;
+}
+.exp-items li::before {
+  content: '◆'; position: absolute; left: 0;
+  font-size: 0.4rem; top: 6px; color: var(--gold);
+}
+
 /* ============ PROJECTS ============ */
 #projects { background: var(--navy2); }
 
@@ -510,6 +571,6 @@ footer {
   .nav-links { gap: 18px; }
   .about-inner { grid-template-columns: 1fr; }
   .about-photo { max-width: 200px; margin: 0 auto; }
-  .edu-card { padding: 24px; }
+  .edu-card, .exp-card { padding: 24px; }
   .cert-row { padding: 18px 20px; }
 }

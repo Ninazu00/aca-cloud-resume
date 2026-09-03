@@ -16,6 +16,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certifications">Certs</a></li>
   </ul>
@@ -28,7 +29,11 @@
   <div class="hero-content">
     <div class="hero-eyebrow">Welcome to my portfolio</div>
     <h1 class="hero-name">Mohamed<br><span>Ayman</span></h1>
-    <p class="hero-tagline">Network Security · Cloud Security<br>Based in Cairo, Egypt · BSc at The British University in Egypt</p>
+    <p class="hero-tagline">Offensive Security · Cloud &amp; Network Security<br>Based in Cairo, Egypt · BSc at The British University in Egypt</p>
+    <a href="https://docs.google.com/document/d/1a1KUI4DUzIR2LXsFx5fOYTIz4adH2HiBWvQ4JyQxqAU/edit?usp=sharing" target="_blank" class="hero-cv-btn">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>
+      <span>View CV</span>
+    </a>
     <div class="visitor-badge">
       <span class="pulse"></span>
       <span><a id="visitor-count">0</a> visitors have passed through here</span>
@@ -55,10 +60,10 @@
       <div class="about-text">
         <div class="about-greeting reveal">Hello there</div>
         <p class="about-bio reveal reveal-delay-1">
-          I'm Mohamed Ayman, a Computer Science student at the British University in Egypt pursuing a <strong>First Class Honours degree</strong> with a 3.9 GPA. I'm passionate about cybersecurity, computer networks, cloud infrastructure, and all forms of infrastructure and large systems.
+          I'm Mohamed Ayman, a Computer Science student at the British University in Egypt pursuing a <strong>First Class Honours degree</strong> with a 3.9 GPA. I'm currently an <strong>Offensive Security Intern at IP Protocol Inc</strong> and a <strong>Network Intern at Arrows Petroleum</strong>, working across Android and web application penetration testing, network security reviews, and vulnerability assessments.
         </p>
         <p class="about-bio reveal reveal-delay-2">
-          I have a strong foundation in programming, data structures, algorithms, automation, and computer architecture, and I'm always eager to learn new technologies and deepen my understanding of the field
+          I have a strong foundation in programming, data structures, algorithms, automation, and computer architecture, and I believe the best way to learn how to defend systems is to understand how they're broken — which is what drives both my offensive and defensive work.
         </p>
         <div class="social-links reveal reveal-delay-3">
           <a href="https://www.linkedin.com/in/mohamed-abdelaziz-716119a0" target="_blank" class="social-btn">
@@ -122,11 +127,55 @@
   </div>
 </section>
 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Where I've worked</div>
+        <div class="section-title">Experience</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-card-header">
+        <div class="exp-role-wrap">
+          <div class="exp-role">Offensive Security Intern</div>
+          <div class="exp-org">IP Protocol Inc</div>
+        </div>
+        <div class="exp-date">Jul 2026 – Present</div>
+      </div>
+      <ul class="exp-items">
+        <li>Conducting hands-on penetration testing across Android and web applications on real-world production apps</li>
+        <li>SSL pinning bypass, static and dynamic analysis, and attack surface mapping</li>
+      </ul>
+    </div>
+
+    <div class="exp-card reveal reveal-delay-1">
+      <div class="exp-card-header">
+        <div class="exp-role-wrap">
+          <div class="exp-role">Network Intern</div>
+          <div class="exp-org">Arrows Petroleum</div>
+        </div>
+        <div class="exp-date">Sep 2026 – Present</div>
+      </div>
+      <ul class="exp-items">
+        <li>Working within the IT team on network and network security initiatives</li>
+        <li>Security review of company website, network infrastructure, and internal systems</li>
+        <li>Security scanning and vulnerability assessments, collaborating with senior engineers on security gaps</li>
+        <li>Supporting employee security awareness and education efforts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-number">03</div>
+      <div class="section-number">04</div>
       <div class="section-title-wrap">
         <div class="section-eyebrow">What I've built</div>
         <div class="section-title">Projects</div>
@@ -137,7 +186,7 @@
       <div class="project-card reveal">
         <div class="project-tag">Cloud · DevOps</div>
         <div class="project-title">Cloud Resume on AKS</div>
-        <div class="project-desc">Deployed this portfolio site on Azure Kubernetes Service with a self-managed PostgreSQL database, automated TLS via cert-manager and Let's Encrypt, and a live visitor counter. Built with infrastructure-as-code using Kubernetes manifests across the full stack. CI/CD pipeline via GitHub Actions automatically builds the Docker image, pushes it to Azure Container Registry, and deploys to AKS on every push to main.</div>
+        <div class="project-desc">Deployed this portfolio site on Azure Kubernetes Service with a self-managed PostgreSQL database, automated TLS via cert-manager and Let's Encrypt, and a live visitor counter. Built with infrastructure-as-code using Kubernetes manifests across the full stack. CI/CD pipeline via GitHub Actions automatically builds the Docker image, pushes it to Azure Container Registry, and deploys to AKS on every push to main, secured with Azure Key Vault, Kubernetes NetworkPolicies, and Trivy image scanning.</div>
         <div class="project-tech">
           <span class="tech-pill">Kubernetes</span>
           <span class="tech-pill">AKS</span>
@@ -170,7 +219,7 @@
 <section id="certifications">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="section-title-wrap">
         <div class="section-eyebrow">Credentials</div>
         <div class="section-title">Certifications</div>
