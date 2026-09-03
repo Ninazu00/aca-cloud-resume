@@ -8,6 +8,11 @@ RUN npm ci --omit=dev
 FROM node:25-slim
 WORKDIR /app
 
+# Patch OS-level vulnerabilities in the base image
+RUN apt-get update && \
+    apt-get upgrade -y --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN rm -rf /usr/local/lib/node_modules/npm && \
     rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack
 
