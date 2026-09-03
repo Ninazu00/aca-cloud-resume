@@ -50,4 +50,7 @@ jobs:
           az containerapp update \
             --name resume-backend \
             --resource-group resumeaca-rg \
-            --image docker.io/ninazu00/resume-backend:${{ github.event.workflow_run.head_sha }}
+            --image docker.io/ninazu00/resume-backend:${{ github.event.workflow_run.head_sha }} \
+            --registry-server docker.io \
+            --registry-username ${{ secrets.DOCKERHUB_USERNAME }} \
+            --registry-password ${{ secrets.DOCKERHUB_TOKEN }}
