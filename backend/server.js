@@ -44,7 +44,7 @@ app.use('/js', express.static(path.join(__dirname, '../frontend/js')));
 // Explicit allowlist for standalone top-level pages. Must be registered
 // before the '/' catch-all below, since Express matches routes in order
 // and app.use('/', ...) would otherwise intercept every request first.
-app.get('/Plans.html', (req, res) => {
+app.get('/pl726an', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/Plans.html'));
 });
 
