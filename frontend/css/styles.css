@@ -1,6 +1,6 @@
 /* ============ RESET & BASE ============ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   font-family: 'Josefin Sans', 'DM Sans', sans-serif;
   background: #0a0f1a;
@@ -19,10 +19,27 @@ body {
   --muted: #8a8478;
   --border: rgba(201,168,76,0.18);
   --card: rgba(255,255,255,0.04);
+
+  /* Names the Plans page uses, aliased onto the palette above so there is one source of truth */
+  --bg: var(--navy);
+  --panel: var(--navy2);
+  --ink: var(--cream);
+  --gold-text: var(--gold-light);   /* small gold text (higher contrast) */
+  --rule: rgba(201,168,76,0.28);
+  --tint: rgba(201,168,76,0.12);
+  --hero-bg: var(--navy);
+  --hero-ink: var(--cream);
+  --hero-gold: var(--gold-light);
+
+  /* Art Deco corner frame (shared by both heroes) */
+  --deco-size: clamp(84px, 15vw, 232px);
+  --deco-side: 22px;
+  --deco-top: 88px;      /* clears the fixed nav */
+  --deco-bottom: 22px;
 }
 
 /* ============ SCROLLBAR ============ */
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--navy); }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
@@ -48,12 +65,12 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 7px 15px;
-  border: 1px solid var(--gold);
-  background: rgba(201,168,76,0.06);
-  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
-  transition: background 0.2s;
+  border: 0;
+  background: transparent;
+  clip-path: none;
+  transition: color 0.2s;
 }
-.nav-logo:hover { background: rgba(201,168,76,0.14); }
+.nav-logo:hover { background: transparent; }
 
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
@@ -84,7 +101,7 @@ nav {
   overflow: hidden;
   text-align: center;
   padding: 80px 24px 60px;
-  border-bottom: 3px double var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .hero-bg {
@@ -105,6 +122,21 @@ nav {
 }
 
 .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+/* ============ ART DECO CORNER FRAME ============
+   One corner drawn once (top-left) as an inline SVG, mirrored into the other three.
+   Nested double rule that fades out along both edges, plus a square medallion holding
+   a quarter sunburst. Used by both heroes: <div class="deco-corner tl|tr|bl|br"></div> x4.
+   Size, inset and top offset are tokens in :root. */
+.deco-corner {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: var(--deco-size); height: var(--deco-size);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke-width='1.5'%3E%3Cdefs%3E%3ClinearGradient id='h' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='200' y2='0'%3E%3Cstop offset='0' stop-color='%23e8c56e'/%3E%3Cstop offset='.5' stop-color='%23c9a84c'/%3E%3Cstop offset='1' stop-color='%23c9a84c' stop-opacity='.1'/%3E%3C/linearGradient%3E%3ClinearGradient id='v' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='200'%3E%3Cstop offset='0' stop-color='%23e8c56e'/%3E%3Cstop offset='.5' stop-color='%23c9a84c'/%3E%3Cstop offset='1' stop-color='%23c9a84c' stop-opacity='.1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M1 2H200' stroke='url(%23h)'/%3E%3Cpath d='M2 1V200' stroke='url(%23v)'/%3E%3Cpath d='M72 14H150' stroke='url(%23h)'/%3E%3Cpath d='M14 72V150' stroke='url(%23v)'/%3E%3Cpath d='M2 72H72V2' stroke='%23c9a84c'/%3E%3Cpath d='M33 20A13 13 0 0 1 20 33' stroke='%23e8c56e'/%3E%3Cpath d='M36.2 25.3L72.0 36.9M33.8 30.0L72.0 57.8M30.0 33.8L57.8 72.0M25.3 36.2L36.9 72.0' stroke='%23c9a84c'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+.deco-corner.tl { top: var(--deco-top);       left: var(--deco-side); }
+.deco-corner.tr { top: var(--deco-top);       right: var(--deco-side); transform: scaleX(-1); }
+.deco-corner.bl { bottom: var(--deco-bottom); left: var(--deco-side); transform: scaleY(-1); }
+.deco-corner.br { bottom: var(--deco-bottom); right: var(--deco-side); transform: scale(-1, -1); }
 
 /* Art Deco billboard plaque — chamfered double-frame, borrowed from the Senior Year Plan
    hero. No sunburst here on purpose, so it stays clean. */
@@ -269,7 +301,7 @@ section {
 }
 
 /* ============ ABOUT ============ */
-#about { background: var(--navy2); }
+#about { background: radial-gradient(ellipse 65% 55% at 12% 0%, rgba(201,168,76,0.05) 0%, transparent 60%), var(--navy); position: relative; }
 
 .about-inner {
   display: grid;
@@ -345,7 +377,7 @@ section {
 .social-btn span, .social-btn svg { position: relative; z-index: 1; }
 
 /* ============ EDUCATION ============ */
-#education { background: var(--navy); }
+#education { background: radial-gradient(ellipse 60% 55% at 88% 100%, rgba(192,57,43,0.05) 0%, transparent 60%), var(--navy2); position: relative; }
 
 .edu-card {
   background: var(--card);
@@ -407,7 +439,7 @@ section {
 }
 
 /* ============ EXPERIENCE ============ */
-#experience { background: var(--navy2); }
+#experience { background: radial-gradient(ellipse 65% 55% at 8% 100%, rgba(201,168,76,0.05) 0%, transparent 60%), var(--navy); position: relative; }
 
 .exp-card {
   background: var(--card);
@@ -453,7 +485,7 @@ section {
 }
 
 /* ============ PROJECTS ============ */
-#projects { background: var(--navy2); }
+#projects { background: radial-gradient(ellipse 60% 55% at 92% 0%, rgba(192,57,43,0.05) 0%, transparent 60%), var(--navy2); position: relative; }
 
 .projects-grid {
   display: grid;
@@ -520,7 +552,7 @@ section {
 .add-project span { font-size: 0.78rem; letter-spacing: 1px; }
 
 /* ============ CERTIFICATIONS ============ */
-#certifications { background: var(--navy); }
+#certifications { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 65%), var(--navy); position: relative; }
 
 .certs-list { display: flex; flex-direction: column; gap: 16px; }
 .cert-row {
@@ -628,4 +660,423 @@ footer {
   .about-photo { max-width: 200px; margin: 0 auto; }
   .edu-card, .exp-card { padding: 24px; }
   .cert-row { padding: 18px 20px; }
+}
+
+/* =====================================================================
+   SENIOR YEAR PLAN (Plans.html)
+   Everything below is scoped under .page-plans (a class on <html>), so it
+   cannot touch the portfolio page. Colours come from the shared tokens above.
+   ===================================================================== */
+html.page-plans {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 3.6rem;
+  color-scheme: dark;
+  --deco-top: 88px;   /* same nav height as the portfolio */
+}
+.page-plans body {
+  font-family: 'Josefin Sans', 'Century Gothic', 'Futura', 'Avenir Next', system-ui, sans-serif;
+  font-size: 1.04rem;
+  line-height: 1.55;
+}
+.page-plans.js .js-only { display: inline-block; }   /* set on <html> by the page's script */
+/* The shared reset gives pseudo-elements border-box; this page was drawn with the browser default
+   (content-box) for its ornament rules, diamonds and checkmarks, so keep that here. */
+.page-plans ::before, .page-plans ::after { box-sizing: content-box; }
+
+.page-plans a{color:var(--gold-text)}
+.page-plans :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.page-plans .wrap{max-width:54rem;margin:0 auto;padding:0 1rem}
+
+/* ---------- hero: matches the portfolio's hero ---------- */
+.page-plans .hero{
+  position:relative;overflow:hidden;color:var(--hero-ink);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(192,57,43,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    linear-gradient(160deg, var(--hero-bg) 0%, var(--panel) 100%);
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;
+  padding:90px 1rem 60px;
+  border-bottom:1px solid var(--rule);
+}
+
+
+/* Scroll cue: shares .hero-scroll / .scroll-line with the portfolio; only the differences here */
+.page-plans .hero-scroll{bottom:22px;z-index:1;animation:none}
+.page-plans .scroll-line{height:40px}
+.page-plans .plaque{
+  --n:20px;position:relative;z-index:1;display:inline-block;max-width:100%;
+  background:var(--hero-gold);padding:1px;
+  clip-path:polygon(var(--n) 0,calc(100% - var(--n)) 0,100% var(--n),100% calc(100% - var(--n)),calc(100% - var(--n)) 100%,var(--n) 100%,0 calc(100% - var(--n)),0 var(--n));
+}
+.page-plans .plaque-in{
+  --n:19px;background:var(--hero-bg);padding:1.7rem clamp(1.2rem,6vw,3.2rem) 1.5rem;
+  clip-path:polygon(var(--n) 0,calc(100% - var(--n)) 0,100% var(--n),100% calc(100% - var(--n)),calc(100% - var(--n)) 100%,var(--n) 100%,0 calc(100% - var(--n)),0 var(--n));
+}
+.page-plans .hero .kicker{margin:0;font-size:.92rem;letter-spacing:.12em;color:var(--hero-gold)}
+.page-plans .hero h1{
+  margin:.5rem 0 .2rem;font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;
+  font-size:clamp(2.3rem,10.5vw,4.4rem);line-height:1.02;letter-spacing:.08em;text-transform:uppercase;
+}
+.page-plans .hero .sub{margin:.3rem 0 0;font-size:1rem}
+.page-plans .hero .ver{margin:.9rem 0 0;font-size:.85rem;color:var(--hero-gold)}
+.page-plans .orn{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.9rem auto;color:var(--hero-gold)}
+.page-plans .orn::before,.page-plans .orn::after{content:"";flex:1;max-width:6rem;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+.page-plans .orn i{width:.62rem;height:.62rem;border:1px solid currentColor;transform:rotate(45deg);display:block}
+
+/* ---------- nav ---------- */
+.page-plans nav.top{
+  position:fixed;top:0;left:0;right:0;z-index:10;
+  background:rgba(10,15,26,0.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 52px;
+}
+.page-plans .nav-tabs{
+  display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  min-width:0;
+}
+.page-plans .nav-tabs::-webkit-scrollbar{display:none}
+.page-plans nav.top .nav-tabs a{
+  flex:0 0 auto;padding:0 1rem;text-decoration:none;color:var(--muted);
+  font-size:.78rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;
+  position:relative;transition:color .2s;
+}
+.page-plans nav.top .nav-tabs a::after{
+  content:'';position:absolute;bottom:-4px;left:1rem;right:1rem;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s;
+}
+.page-plans nav.top .nav-tabs a:hover{color:var(--gold)}
+.page-plans nav.top .nav-tabs a:hover::after{transform:scaleX(1)}
+
+/* Same medallion as the portfolio's nav logo (.nav-logo), pinned left, linking home */
+.page-plans nav.top a.nav-logo{flex:0 0 auto;text-transform:none;color:var(--gold)}
+
+/* ---------- headings ---------- */
+.page-plans h2{
+  display:flex;align-items:center;gap:1rem;margin:3.2rem 0 1.4rem;
+  font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;
+  font-size:clamp(1.7rem,6.4vw,2.3rem);letter-spacing:.1em;text-transform:uppercase;text-align:center;
+  position:relative;
+}
+.page-plans h2::before,.page-plans h2::after{content:"";flex:1 1 1rem;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.page-plans h2 span{flex:0 1 auto}
+
+/* faded section numbers, echoing the portfolio's big watermark digits */
+.page-plans main.wrap{counter-reset:sec;padding-top:4.5rem}
+.page-plans main.wrap>section{counter-increment:sec;position:relative;padding:.2rem 0 0}
+.page-plans main.wrap>section::before{
+  content:counter(sec,decimal-leading-zero);
+  position:absolute;top:-.6rem;left:0;
+  font-family:'Poiret One',serif;font-size:3.4rem;font-weight:400;
+  color:var(--tint);line-height:1;letter-spacing:-1px;pointer-events:none;z-index:0;
+}
+.page-plans h3{margin:0 0 .5rem;font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;font-size:1.6rem;letter-spacing:.06em}
+.page-plans p{margin:.4rem 0 .8rem}
+.page-plans .lede{text-align:center;color:var(--muted);max-width:40rem;margin:-.6rem auto 1.4rem}
+
+/* ---------- framed panel: two thin lines, gradient accent + lift (inspired by the portfolio's cards) ---------- */
+.page-plans .card,.page-plans details.week{
+  position:relative;overflow:hidden;
+  background:var(--panel);border:1px solid var(--gold);
+  box-shadow:inset 0 0 0 4px var(--panel),inset 0 0 0 5px var(--rule);
+  transition:transform .2s,box-shadow .2s;
+}
+.page-plans .card::before,.page-plans details.week::before{
+  content:"";position:absolute;top:0;left:0;width:3px;height:100%;z-index:2;
+  background:linear-gradient(to bottom,var(--gold),var(--red));
+}
+.page-plans .card::after,.page-plans details.week::after{
+  content:"";position:absolute;top:0;right:0;z-index:2;
+  border-style:solid;border-width:0 22px 22px 0;
+  border-color:transparent var(--gold) transparent transparent;
+  opacity:.22;transition:opacity .2s;
+}
+.page-plans .card:hover,.page-plans details.week:hover{
+  transform:translateY(-2px);
+  box-shadow:inset 0 0 0 4px var(--panel),inset 0 0 0 5px var(--rule),0 14px 34px rgba(0,0,0,.35);
+}
+.page-plans .card:hover::after,.page-plans details.week:hover::after{opacity:.5}
+@media (prefers-reduced-motion:reduce){.page-plans .card,.page-plans details.week{transition:none}}
+.page-plans .card{padding:1.3rem 1.3rem 1.1rem;margin:0 0 1.1rem}
+.page-plans .two{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.page-plans .two>.card{margin:0}
+
+.page-plans ul.dia{list-style:none;margin:.4rem 0;padding:0}
+.page-plans ul.dia li{position:relative;padding:.22rem 0 .22rem 1.35rem}
+.page-plans ul.dia li::before{content:"";position:absolute;left:.15rem;top:.78em;width:.42rem;height:.42rem;border:1px solid var(--gold);transform:rotate(45deg)}
+.page-plans .muted{color:var(--muted)}
+.page-plans .small{font-size:.88rem}
+
+/* ---------- rhythm ---------- */
+.page-plans .stats{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));margin-bottom:1.1rem}
+.page-plans .stat{text-align:center;padding:1.2rem 1rem}
+.page-plans .stat .big{font-family:'Poiret One',serif;font-size:2.8rem;line-height:1;color:var(--gold)}
+.page-plans .stat .nm{font-weight:600;font-size:1.05rem;margin-top:.2rem}
+.page-plans .stat .hrs{color:var(--gold-text);font-weight:600;font-size:.92rem}
+
+/* ---------- timetable ---------- */
+.page-plans .days{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.page-plans .day{padding:1.1rem 1.2rem}
+.page-plans .day h3{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
+.page-plans .day h3 small{font-family:'Josefin Sans',sans-serif;font-size:.85rem;color:var(--muted);letter-spacing:0}
+.page-plans .sess{padding:.6rem 0;border-top:1px solid var(--rule)}
+.page-plans .sess .time{font-weight:600;color:var(--gold-text);letter-spacing:.04em}
+.page-plans .sess .code{font-weight:600}
+.page-plans .kind{display:inline-block;margin-left:.4rem;padding:0 .45rem;border:1px solid var(--gold);background:var(--tint);color:var(--gold-text);font-size:.78rem;line-height:1.5}
+.page-plans .sess .where{display:block;font-size:.88rem;color:var(--muted)}
+.page-plans .gapline{padding:.45rem 0;border-top:1px dashed var(--gold);font-size:.86rem;font-style:italic;color:var(--muted)}
+.page-plans .off{padding:.6rem 0;border-top:1px solid var(--rule);color:var(--muted)}
+
+/* ---------- week view (calendar) ---------- */
+.page-plans .calcard{padding:.8rem}
+.page-plans .cal-hint{margin:0 0 .6rem;font-size:.86rem;color:var(--muted)}
+.page-plans .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--panel)}
+.page-plans .cal{--gw:3rem;--cw:6.9rem;--hh:3.5rem;min-width:calc(var(--gw) + 7*var(--cw))}
+.page-plans .cal-head,.page-plans .cal-body{display:grid;grid-template-columns:var(--gw) repeat(7,minmax(var(--cw),1fr))}
+.page-plans .cal-head{border-bottom:2px solid var(--gold)}
+.page-plans .dh{padding:.5rem .3rem .45rem;text-align:center;font-weight:600;border-left:1px solid var(--rule)}
+.page-plans .dh small{display:block;font-weight:400;font-size:.76rem;line-height:1.3;color:var(--muted)}
+.page-plans .gut{position:sticky;left:0;z-index:3;background:var(--panel)}
+.page-plans .cal-body{position:relative}
+.page-plans .cal-body .gut{border-right:1px solid var(--rule)}
+.page-plans .gl{position:absolute;right:.4rem;transform:translateY(-50%);font-size:.74rem;color:var(--muted);background:var(--panel);padding:0 .1rem}
+.page-plans .lines{position:absolute;left:var(--gw);right:0;top:0;bottom:0;pointer-events:none}
+.page-plans .ln{position:absolute;left:0;right:0;border-top:1px solid var(--rule);opacity:.75}
+.page-plans .col{position:relative;z-index:1;border-left:1px solid var(--rule)}
+.page-plans .ev{
+  position:absolute;left:3px;right:3px;padding:.28rem .38rem;overflow:hidden;
+  font-size:.75rem;line-height:1.28;border:1px solid var(--gold);overflow-wrap:anywhere;hyphens:auto;
+}
+.page-plans .ev b{display:block;font-size:.8rem;font-weight:600;line-height:1.22}
+.page-plans .ev span{display:block}
+.page-plans .ev-class{color:var(--ink)}
+.page-plans .ev-class span{opacity:.92}
+.page-plans .ev-commute{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--rule) 6px 7px),var(--panel);border-color:var(--rule);color:var(--muted)}
+.page-plans .ev-gap{background:transparent;border:1px dashed var(--gold);color:var(--muted);font-style:italic}
+.page-plans .ev-open,.page-plans .ev-off{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.page-plans .ev-open{background:var(--tint);color:var(--gold-text)}
+.page-plans .ev-off{background:repeating-linear-gradient(135deg,transparent 0 8px,var(--rule) 8px 9px),var(--panel);border-color:var(--rule);color:var(--muted)}
+.page-plans .legend{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin:.9rem 0 .1rem;font-size:.88rem}
+.page-plans .legend span{display:inline-flex;align-items:center;gap:.45rem}
+.page-plans .sw{display:inline-block;flex:0 0 auto;width:.95rem;height:.95rem;border:1px solid var(--gold)}
+.page-plans .sw-commute{background:repeating-linear-gradient(135deg,transparent 0 3px,var(--rule) 3px 4px),var(--panel);border-color:var(--rule)}
+.page-plans .sw-gap{border-style:dashed}
+.page-plans .sw-open{background:var(--tint)}
+@media (max-width:600px){.page-plans .cal{--cw:6.6rem}}
+
+/* ---------- ledger + tables ---------- */
+.page-plans .ledger{list-style:none;margin:0;padding:0}
+.page-plans .ledger li{display:flex;justify-content:space-between;gap:1rem;padding:.42rem 0;border-bottom:1px dotted var(--gold)}
+.page-plans .ledger li.total{border-bottom:0;border-top:3px double var(--gold);margin-top:.5rem;padding-top:.7rem;font-weight:600;font-size:1.15rem}
+.page-plans .ledger li.total b{font-family:'Poiret One',serif;font-weight:400;font-size:1.9rem;line-height:1;color:var(--gold-text)}
+.page-plans .scroll{overflow-x:auto}
+.page-plans table{width:100%;border-collapse:collapse;font-size:.95rem}
+.page-plans th,.page-plans td{padding:.5rem .55rem;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+.page-plans th:first-child,.page-plans td:first-child{text-align:left}
+.page-plans th{font-weight:600;color:var(--gold-text);border-bottom:2px solid var(--gold)}
+.page-plans td b{color:var(--gold-text)}
+
+/* ---------- weeks ---------- */
+.page-plans .tools{display:flex;gap:.6rem;justify-content:center;margin:0 0 1rem;flex-wrap:wrap}
+.page-plans button.btn,.page-plans a.btn{
+  font:inherit;font-weight:500;font-size:.82rem;letter-spacing:.5px;background:transparent;color:var(--ink);
+  border:1px solid var(--rule);padding:.65rem 1.3rem;min-height:2.6rem;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  transition:all .2s;
+}
+.page-plans button.btn:hover,.page-plans a.btn:hover{
+  border-color:var(--gold);
+  background:rgba(201,168,76,.08);
+  color:var(--gold-text);
+}
+.page-plans .js-only{display:none}
+.page-plans details.week{margin:0 0 .9rem}
+.page-plans details.week>summary{
+  list-style:none;cursor:pointer;padding:1rem 1.2rem;
+  display:grid;grid-template-columns:auto 1fr auto;column-gap:1rem;row-gap:.5rem;align-items:center;
+}
+.page-plans details.week>summary::-webkit-details-marker{display:none}
+.page-plans .wk-n{font-family:'Poiret One',serif;font-size:2.6rem;line-height:1;color:var(--gold)}
+.page-plans .wk-m{display:flex;flex-direction:column}
+.page-plans .wk-d{font-weight:600}
+.page-plans .wk-tag{font-size:.86rem;color:var(--gold-text)}
+.page-plans .wk-now{align-self:flex-start;margin-top:.25rem;padding:0 .5rem;font-size:.8rem;font-weight:600;background:var(--red);color:var(--ink)}
+.page-plans .wk-stats{display:flex;flex-direction:column;text-align:right;font-size:.88rem;color:var(--muted)}
+.page-plans .wk-stats b{font-size:1.05rem;color:var(--ink)}
+.page-plans .wk-done{color:var(--gold-text);font-weight:600}
+.page-plans .bar{grid-column:1/-1;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);position:relative}
+.page-plans .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--gold)}
+.page-plans details.week>summary::after{content:none}
+.page-plans details.week[open]>summary{border-bottom:1px solid var(--rule)}
+.page-plans .wk-body{padding:.2rem 0 .4rem}
+.page-plans .wk-avg{margin:0;padding:.7rem 1.2rem;font-size:.9rem;color:var(--muted)}
+.page-plans .cat{padding:.8rem 1.2rem;border-top:1px solid var(--rule)}
+.page-plans .cat-h{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.page-plans .cat-name{font-weight:600;font-size:1.12rem}
+.page-plans .cat-hours{color:var(--gold-text);font-weight:600;white-space:nowrap}
+.page-plans .was{font-weight:400;color:var(--muted);font-size:.85rem}
+.page-plans .focus{margin:.1rem 0 .3rem;color:var(--muted);font-size:.94rem}
+.page-plans .why{margin:.1rem 0 .3rem;font-size:.86rem;font-style:italic;color:var(--muted)}
+.page-plans .wk-note{margin:0;padding:.7rem 1.2rem;border-top:1px solid var(--rule);font-size:.9rem;color:var(--muted)}
+
+.page-plans label.task{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0;min-height:2.7rem;cursor:pointer}
+.page-plans label.task .t{flex:1}
+.page-plans label.task .h{white-space:nowrap;color:var(--muted);font-size:.9rem}
+.page-plans label.task input{
+  -webkit-appearance:none;appearance:none;flex:0 0 1.3rem;width:1.3rem;height:1.3rem;margin:.12rem 0 0;
+  border:1px solid var(--gold);background:transparent;display:grid;place-content:center;cursor:pointer;
+}
+.page-plans label.task input::before{content:"";width:.55rem;height:.55rem;background:var(--gold);transform:rotate(45deg) scale(0);transition:transform .12s}
+.page-plans label.task input:checked::before{transform:rotate(45deg) scale(1)}
+.page-plans label.task input:checked ~ .t{text-decoration:line-through;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.page-plans label.task input::before{transition:none}}
+
+/* ---------- breaks / semester 2 ---------- */
+.page-plans .brk{padding:1.1rem 1.3rem .6rem}
+.page-plans .brk h3{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.page-plans .brk h3 small{font-family:'Josefin Sans',sans-serif;font-size:.9rem;color:var(--gold-text);font-weight:600;letter-spacing:0}
+.page-plans .brk .cat{padding-left:0;padding-right:0}
+.page-plans .month>summary{grid-template-columns:1fr auto}
+.page-plans .month .wk-n{font-size:2rem;letter-spacing:.04em}
+.page-plans .mbody{padding:.4rem 1.2rem 1rem}
+.page-plans .mbody h4{margin:.9rem 0 .2rem;font-size:1rem;font-weight:600;color:var(--gold-text)}
+
+.page-plans footer{margin:3.4rem 0 3rem;text-align:center;color:var(--muted);font-size:.9rem;background:none;border-top:0}
+.page-plans footer .orn{color:var(--gold)}
+
+@media (max-width:480px){
+  .page-plans details.week>summary{grid-template-columns:auto 1fr}
+  .page-plans .wk-stats{grid-column:1/-1;flex-direction:row;justify-content:space-between;text-align:left}
+  .page-plans .card{padding:1.1rem 1rem .9rem}
+  .page-plans .cat,.page-plans .wk-avg,.page-plans .wk-note{padding-left:1rem;padding-right:1rem}
+}
+@media print{
+  .page-plans nav.top,.page-plans .tools,.page-plans footer button{display:none}
+  .page-plans body{background:#fff;color:#000}
+  .page-plans .hero{border-bottom:2px solid #000}
+}
+
+
+/* ============ NAV CONSISTENCY ============ */
+.nav-logo, .page-plans nav.top a.nav-logo {
+  border: 0 !important;
+  background: transparent !important;
+  clip-path: none !important;
+  padding: 7px 15px !important;
+}
+.nav-logo:hover, .page-plans nav.top a.nav-logo:hover { background: transparent !important; }
+
+/* Both pages use the exact same desktop navbar height/padding. */
+nav, .page-plans nav.top {
+  padding: 18px 52px;
+  min-height: 53px;
+  box-sizing: border-box;
+}
+
+/* Keep the same navbar dimensions at the shared mobile breakpoint too. */
+@media (max-width: 700px) {
+  nav, .page-plans nav.top { padding: 16px 24px; min-height: 49px; }
+}
+
+/* ============ MOBILE NAVIGATION ============
+   Keep the navbar one consistent height while allowing the navigation links
+   to scroll horizontally on narrow screens instead of wrapping or colliding. */
+@media (max-width: 700px) {
+  nav,
+  .page-plans nav.top {
+    height: 49px;
+    min-height: 49px;
+    padding: 0 14px;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  nav .nav-logo,
+  .page-plans nav.top .nav-logo {
+    flex: 0 0 auto;
+    padding: 7px 10px !important;
+    line-height: 1;
+  }
+
+  /* Portfolio navigation */
+  nav .nav-links {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    gap: 20px;
+    margin: 0;
+    padding: 0 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  nav .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav .nav-links li {
+    flex: 0 0 auto;
+  }
+
+  nav .nav-links a {
+    display: block;
+    font-size: .68rem;
+    letter-spacing: 1.5px;
+    padding: 16px 0;
+  }
+
+  /* Plans navigation */
+  .page-plans nav.top .nav-tabs {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .page-plans nav.top .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-plans nav.top .nav-tabs a {
+    flex: 0 0 auto;
+    padding: 16px .85rem;
+    font-size: .68rem;
+    letter-spacing: 1.5px;
+  }
+
+  .page-plans nav.top .nav-tabs a::after {
+    bottom: 11px;
+    left: .85rem;
+    right: .85rem;
+  }
+
+  /* Give fixed navigation enough clearance without changing its height. */
+  html {
+    scroll-padding-top: 49px;
+  }
+
+  html.page-plans {
+    scroll-padding-top: 49px;
+    --deco-top: 64px;
+  }
+
+  .page-plans main.wrap {
+    padding-top: 3.8rem;
+  }
 }

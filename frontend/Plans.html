@@ -3,313 +3,24 @@
   STATIC COPY. This file has no JavaScript dependency for its content, so it also displays in the
   iPhone Files app (Quick Look), which does not run scripts. Small extras (saved ticks, this-week
   highlight, open/close all) switch on only in a real browser.
+  STYLES: this page no longer carries its own CSS. It uses css/styles.css (shared with index.html), so keep it next to the css/ folder; a lone copy (e.g. in the Files app) will show unstyled.
   To change the plan: edit senior-year-plan-source.html (the data-driven master) or ask Claude to regenerate this file.
---><html lang="en"><head>
+--><html lang="en" class="page-plans"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Senior Year Plan 2026–27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&amp;family=Poiret+One&amp;display=swap" rel="stylesheet">
-<style>
-/* ==========================================================
-   STYLE — tokens first. Change colours here and nowhere else.
-   ========================================================== */
-:root{
-  --bg:#0a0f1a;
-  --panel:#111827;
-  --ink:#e8e4dc;
-  --muted:#8a8478;
-  --gold:#c9a84c;        /* lines, large ornaments */
-  --gold-text:#e8c56e;   /* small gold text (higher contrast) */
-  --rule:rgba(201,168,76,.28);
-  --red:#c0392b;
-  --red-light:#e74c3c;
-  --hero-bg:#0a0f1a;
-  --hero-ink:#e8e4dc;
-  --hero-gold:#e8c56e;
-  --tint:rgba(201,168,76,.12);
-  color-scheme:dark;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0a0f1a; --panel:#111827; --ink:#e8e4dc; --muted:#8a8478;
-    --gold:#c9a84c; --gold-text:#e8c56e; --rule:rgba(201,168,76,.28); --tint:rgba(201,168,76,.12);
-    --red:#c0392b; --red-light:#e74c3c;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0a0f1a; --panel:#111827; --ink:#e8e4dc; --muted:#8a8478;
-  --gold:#c9a84c; --gold-text:#e8c56e; --rule:rgba(201,168,76,.28); --tint:rgba(201,168,76,.12);
-  --red:#c0392b; --red-light:#e74c3c;
-  color-scheme:dark;
-}
-
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-padding-top:3.6rem}
-@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-body{
-  margin:0;background:var(--bg);color:var(--ink);
-  font-family:'Josefin Sans','Century Gothic','Futura','Avenir Next',system-ui,sans-serif;
-  font-size:1.04rem;line-height:1.55;
-}
-a{color:var(--gold-text)}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.wrap{max-width:54rem;margin:0 auto;padding:0 1rem}
-
-/* ---------- hero: fan + arcs behind a notched plaque ---------- */
-.hero{
-  position:relative;overflow:hidden;background:var(--hero-bg);color:var(--hero-ink);
-  text-align:center;padding:clamp(2.4rem,9vw,4.2rem) 1rem clamp(2.4rem,8vw,3.6rem);
-  border-bottom:4px double var(--hero-gold);
-}
-.hero::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    repeating-radial-gradient(circle at 50% 100%,transparent 0 38px,rgba(212,178,94,.38) 38px 39px,transparent 39px 60px),
-    repeating-conic-gradient(from -90deg at 50% 100%,rgba(212,178,94,.24) 0 2.4deg,transparent 2.4deg 7.5deg);
-  -webkit-mask-image:linear-gradient(to top,#000 10%,transparent 92%);
-  mask-image:linear-gradient(to top,#000 10%,transparent 92%);
-}
-.plaque{
-  --n:20px;position:relative;display:inline-block;max-width:100%;
-  background:var(--hero-gold);padding:2px;
-  clip-path:polygon(var(--n) 0,calc(100% - var(--n)) 0,100% var(--n),100% calc(100% - var(--n)),calc(100% - var(--n)) 100%,var(--n) 100%,0 calc(100% - var(--n)),0 var(--n));
-}
-.plaque-in{
-  --n:19px;background:var(--hero-bg);padding:1.7rem clamp(1.2rem,6vw,3.2rem) 1.5rem;
-  clip-path:polygon(var(--n) 0,calc(100% - var(--n)) 0,100% var(--n),100% calc(100% - var(--n)),calc(100% - var(--n)) 100%,var(--n) 100%,0 calc(100% - var(--n)),0 var(--n));
-}
-.hero .kicker{margin:0;font-size:.92rem;letter-spacing:.12em;color:var(--hero-gold)}
-.hero h1{
-  margin:.5rem 0 .2rem;font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;
-  font-size:clamp(2.3rem,10.5vw,4.4rem);line-height:1.02;letter-spacing:.08em;text-transform:uppercase;
-}
-.hero .sub{margin:.3rem 0 0;font-size:1rem}
-.hero .ver{margin:.9rem 0 0;font-size:.85rem;color:var(--hero-gold)}
-.orn{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.9rem auto;color:var(--hero-gold)}
-.orn::before,.orn::after{content:"";flex:1;max-width:6rem;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
-.orn i{width:.62rem;height:.62rem;border:1px solid currentColor;transform:rotate(45deg);display:block}
-
-/* ---------- nav ---------- */
-nav.top{
-  position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--gold);
-  display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-nav.top::-webkit-scrollbar{display:none}
-nav.top a{
-  flex:0 0 auto;padding:.85rem 1rem;text-decoration:none;color:var(--gold-text);
-  font-weight:600;font-size:.92rem;letter-spacing:.06em;white-space:nowrap;
-}
-nav.top a:hover{color:var(--ink)}
-
-/* ---------- headings ---------- */
-h2{
-  display:flex;align-items:center;gap:1rem;margin:3.2rem 0 1.4rem;
-  font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;
-  font-size:clamp(1.7rem,6.4vw,2.3rem);letter-spacing:.1em;text-transform:uppercase;text-align:center;
-  position:relative;
-}
-h2::before,h2::after{content:"";flex:1 1 1rem;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
-h2 span{flex:0 1 auto}
-
-/* faded section numbers, echoing the portfolio's big watermark digits */
-main.wrap{counter-reset:sec}
-main.wrap>section{counter-increment:sec;position:relative;padding-top:.2rem}
-main.wrap>section::before{
-  content:counter(sec,decimal-leading-zero);
-  position:absolute;top:-.6rem;left:0;
-  font-family:'Poiret One',serif;font-size:3.4rem;font-weight:400;
-  color:var(--tint);line-height:1;letter-spacing:-1px;pointer-events:none;z-index:0;
-}
-h3{margin:0 0 .5rem;font-family:'Poiret One','Didot','Bodoni MT',serif;font-weight:400;font-size:1.6rem;letter-spacing:.06em}
-p{margin:.4rem 0 .8rem}
-.lede{text-align:center;color:var(--muted);max-width:40rem;margin:-.6rem auto 1.4rem}
-
-/* ---------- framed panel: two thin lines, gradient accent + lift (inspired by the portfolio's cards) ---------- */
-.card,details.week{
-  position:relative;overflow:hidden;
-  background:var(--panel);border:1px solid var(--gold);
-  box-shadow:inset 0 0 0 4px var(--panel),inset 0 0 0 5px var(--rule);
-  transition:transform .2s,box-shadow .2s;
-}
-.card::before,details.week::before{
-  content:"";position:absolute;top:0;left:0;width:3px;height:100%;z-index:2;
-  background:linear-gradient(to bottom,var(--gold),var(--red));
-}
-.card::after,details.week::after{
-  content:"";position:absolute;top:0;right:0;z-index:2;
-  border-style:solid;border-width:0 22px 22px 0;
-  border-color:transparent var(--gold) transparent transparent;
-  opacity:.22;transition:opacity .2s;
-}
-.card:hover,details.week:hover{
-  transform:translateY(-2px);
-  box-shadow:inset 0 0 0 4px var(--panel),inset 0 0 0 5px var(--rule),0 14px 34px rgba(0,0,0,.35);
-}
-.card:hover::after,details.week:hover::after{opacity:.5}
-@media (prefers-reduced-motion:reduce){.card,details.week{transition:none}}
-.card{padding:1.3rem 1.3rem 1.1rem;margin:0 0 1.1rem}
-.two{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
-.two>.card{margin:0}
-
-ul.dia{list-style:none;margin:.4rem 0;padding:0}
-ul.dia li{position:relative;padding:.22rem 0 .22rem 1.35rem}
-ul.dia li::before{content:"";position:absolute;left:.15rem;top:.78em;width:.42rem;height:.42rem;border:1px solid var(--gold);transform:rotate(45deg)}
-.muted{color:var(--muted)}
-.small{font-size:.88rem}
-
-/* ---------- rhythm ---------- */
-.stats{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));margin-bottom:1.1rem}
-.stat{text-align:center;padding:1.2rem 1rem}
-.stat .big{font-family:'Poiret One',serif;font-size:2.8rem;line-height:1;color:var(--gold)}
-.stat .nm{font-weight:600;font-size:1.05rem;margin-top:.2rem}
-.stat .hrs{color:var(--gold-text);font-weight:600;font-size:.92rem}
-
-/* ---------- timetable ---------- */
-.days{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
-.day{padding:1.1rem 1.2rem}
-.day h3{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
-.day h3 small{font-family:'Josefin Sans',sans-serif;font-size:.85rem;color:var(--muted);letter-spacing:0}
-.sess{padding:.6rem 0;border-top:1px solid var(--rule)}
-.sess .time{font-weight:600;color:var(--gold-text);letter-spacing:.04em}
-.sess .code{font-weight:600}
-.kind{display:inline-block;margin-left:.4rem;padding:0 .45rem;border:1px solid var(--gold);background:var(--tint);color:var(--gold-text);font-size:.78rem;line-height:1.5}
-.sess .where{display:block;font-size:.88rem;color:var(--muted)}
-.gapline{padding:.45rem 0;border-top:1px dashed var(--gold);font-size:.86rem;font-style:italic;color:var(--muted)}
-.off{padding:.6rem 0;border-top:1px solid var(--rule);color:var(--muted)}
-
-/* ---------- week view (calendar) ---------- */
-.calcard{padding:.8rem}
-.cal-hint{margin:0 0 .6rem;font-size:.86rem;color:var(--muted)}
-.cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--panel)}
-.cal{--gw:3rem;--cw:6.9rem;--hh:3.5rem;min-width:calc(var(--gw) + 7*var(--cw))}
-.cal-head,.cal-body{display:grid;grid-template-columns:var(--gw) repeat(7,minmax(var(--cw),1fr))}
-.cal-head{border-bottom:2px solid var(--gold)}
-.dh{padding:.5rem .3rem .45rem;text-align:center;font-weight:600;border-left:1px solid var(--rule)}
-.dh small{display:block;font-weight:400;font-size:.76rem;line-height:1.3;color:var(--muted)}
-.gut{position:sticky;left:0;z-index:3;background:var(--panel)}
-.cal-body{position:relative}
-.cal-body .gut{border-right:1px solid var(--rule)}
-.gl{position:absolute;right:.4rem;transform:translateY(-50%);font-size:.74rem;color:var(--muted);background:var(--panel);padding:0 .1rem}
-.lines{position:absolute;left:var(--gw);right:0;top:0;bottom:0;pointer-events:none}
-.ln{position:absolute;left:0;right:0;border-top:1px solid var(--rule);opacity:.75}
-.col{position:relative;z-index:1;border-left:1px solid var(--rule)}
-.ev{
-  position:absolute;left:3px;right:3px;padding:.28rem .38rem;overflow:hidden;
-  font-size:.75rem;line-height:1.28;border:1px solid var(--gold);overflow-wrap:anywhere;hyphens:auto;
-}
-.ev b{display:block;font-size:.8rem;font-weight:600;line-height:1.22}
-.ev span{display:block}
-.ev-class{color:var(--ink)}
-.ev-class span{opacity:.92}
-.ev-commute{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--rule) 6px 7px),var(--panel);border-color:var(--rule);color:var(--muted)}
-.ev-gap{background:transparent;border:1px dashed var(--gold);color:var(--muted);font-style:italic}
-.ev-open,.ev-off{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.ev-open{background:var(--tint);color:var(--gold-text)}
-.ev-off{background:repeating-linear-gradient(135deg,transparent 0 8px,var(--rule) 8px 9px),var(--panel);border-color:var(--rule);color:var(--muted)}
-.legend{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin:.9rem 0 .1rem;font-size:.88rem}
-.legend span{display:inline-flex;align-items:center;gap:.45rem}
-.sw{display:inline-block;flex:0 0 auto;width:.95rem;height:.95rem;border:1px solid var(--gold)}
-.sw-commute{background:repeating-linear-gradient(135deg,transparent 0 3px,var(--rule) 3px 4px),var(--panel);border-color:var(--rule)}
-.sw-gap{border-style:dashed}
-.sw-open{background:var(--tint)}
-@media (max-width:600px){.cal{--cw:6.6rem}}
-
-/* ---------- ledger + tables ---------- */
-.ledger{list-style:none;margin:0;padding:0}
-.ledger li{display:flex;justify-content:space-between;gap:1rem;padding:.42rem 0;border-bottom:1px dotted var(--gold)}
-.ledger li.total{border-bottom:0;border-top:3px double var(--gold);margin-top:.5rem;padding-top:.7rem;font-weight:600;font-size:1.15rem}
-.ledger li.total b{font-family:'Poiret One',serif;font-weight:400;font-size:1.9rem;line-height:1;color:var(--gold-text)}
-.scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.95rem}
-th,td{padding:.5rem .55rem;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
-th:first-child,td:first-child{text-align:left}
-th{font-weight:600;color:var(--gold-text);border-bottom:2px solid var(--gold)}
-td b{color:var(--gold-text)}
-
-/* ---------- weeks ---------- */
-.tools{display:flex;gap:.6rem;justify-content:center;margin:0 0 1rem;flex-wrap:wrap}
-button.btn,a.btn{
-  font:inherit;font-weight:600;font-size:.92rem;background:transparent;color:var(--gold-text);
-  border:1px solid var(--gold);padding:.5rem 1rem;min-height:2.6rem;cursor:pointer;
-  display:inline-flex;align-items:center;text-decoration:none;
-}
-button.btn:hover,a.btn:hover{background:var(--gold);color:var(--panel)}
-.hero .tools{margin:1.3rem 0 0}
-.js-only{display:none}
-html.js .js-only{display:inline-block}
-details.week{margin:0 0 .9rem}
-details.week>summary{
-  list-style:none;cursor:pointer;padding:1rem 1.2rem;
-  display:grid;grid-template-columns:auto 1fr auto;column-gap:1rem;row-gap:.5rem;align-items:center;
-}
-details.week>summary::-webkit-details-marker{display:none}
-.wk-n{font-family:'Poiret One',serif;font-size:2.6rem;line-height:1;color:var(--gold)}
-.wk-m{display:flex;flex-direction:column}
-.wk-d{font-weight:600}
-.wk-tag{font-size:.86rem;color:var(--gold-text)}
-.wk-now{align-self:flex-start;margin-top:.25rem;padding:0 .5rem;font-size:.8rem;font-weight:600;background:var(--red);color:var(--ink)}
-.wk-stats{display:flex;flex-direction:column;text-align:right;font-size:.88rem;color:var(--muted)}
-.wk-stats b{font-size:1.05rem;color:var(--ink)}
-.wk-done{color:var(--gold-text);font-weight:600}
-.bar{grid-column:1/-1;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);position:relative}
-.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--gold)}
-details.week>summary::after{content:none}
-details.week[open]>summary{border-bottom:1px solid var(--rule)}
-.wk-body{padding:.2rem 0 .4rem}
-.wk-avg{margin:0;padding:.7rem 1.2rem;font-size:.9rem;color:var(--muted)}
-.cat{padding:.8rem 1.2rem;border-top:1px solid var(--rule)}
-.cat-h{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
-.cat-name{font-weight:600;font-size:1.12rem}
-.cat-hours{color:var(--gold-text);font-weight:600;white-space:nowrap}
-.was{font-weight:400;color:var(--muted);font-size:.85rem}
-.focus{margin:.1rem 0 .3rem;color:var(--muted);font-size:.94rem}
-.why{margin:.1rem 0 .3rem;font-size:.86rem;font-style:italic;color:var(--muted)}
-.wk-note{margin:0;padding:.7rem 1.2rem;border-top:1px solid var(--rule);font-size:.9rem;color:var(--muted)}
-
-label.task{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0;min-height:2.7rem;cursor:pointer}
-label.task .t{flex:1}
-label.task .h{white-space:nowrap;color:var(--muted);font-size:.9rem}
-label.task input{
-  -webkit-appearance:none;appearance:none;flex:0 0 1.3rem;width:1.3rem;height:1.3rem;margin:.12rem 0 0;
-  border:1px solid var(--gold);background:transparent;display:grid;place-content:center;cursor:pointer;
-}
-label.task input::before{content:"";width:.55rem;height:.55rem;background:var(--gold);transform:rotate(45deg) scale(0);transition:transform .12s}
-label.task input:checked::before{transform:rotate(45deg) scale(1)}
-label.task input:checked ~ .t{text-decoration:line-through;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){label.task input::before{transition:none}}
-
-/* ---------- breaks / semester 2 ---------- */
-.brk{padding:1.1rem 1.3rem .6rem}
-.brk h3{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
-.brk h3 small{font-family:'Josefin Sans',sans-serif;font-size:.9rem;color:var(--gold-text);font-weight:600;letter-spacing:0}
-.brk .cat{padding-left:0;padding-right:0}
-.month>summary{grid-template-columns:1fr auto}
-.month .wk-n{font-size:2rem;letter-spacing:.04em}
-.mbody{padding:.4rem 1.2rem 1rem}
-.mbody h4{margin:.9rem 0 .2rem;font-size:1rem;font-weight:600;color:var(--gold-text)}
-
-footer{margin:3.4rem 0 3rem;text-align:center;color:var(--muted);font-size:.9rem}
-footer .orn{color:var(--gold)}
-
-@media (max-width:480px){
-  details.week>summary{grid-template-columns:auto 1fr}
-  .wk-stats{grid-column:1/-1;flex-direction:row;justify-content:space-between;text-align:left}
-  .card{padding:1.1rem 1rem .9rem}
-  .cat,.wk-avg,.wk-note{padding-left:1rem;padding-right:1rem}
-}
-@media print{
-  nav.top,.tools,footer button{display:none}
-  body{background:#fff;color:#000}
-  .hero{border-bottom:2px solid #000}
-}
-</style>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <header class="hero">
+  <div class="deco-corner tl"></div>
+  <div class="deco-corner tr"></div>
+  <div class="deco-corner bl"></div>
+  <div class="deco-corner br"></div>
   <div class="plaque"><div class="plaque-in">
     <p class="kicker" id="m-uni">The British University in Egypt</p>
     <h1 id="m-title">Senior Year Plan</h1>
@@ -317,19 +28,25 @@ footer .orn{color:var(--gold)}
     <p class="sub" id="m-dates">September 2026 to July 2027</p>
     <p class="sub" id="m-prog">Networks and Cybersecurity, Degree Year Three</p>
     <p class="ver" id="m-ver">Version 3, real S1 timetable, updated 19 Sep 2026</p>
-    <div class="tools"><a class="btn" href="index.html">↩ Back to portfolio</a></div>
   </div></div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
 </header>
 
 <nav class="top" aria-label="Sections">
-  <a href="#goals">Goals</a>
-  <a href="#rhythm">Rhythm</a>
-  <a href="#timetable">Timetable</a>
-  <a href="#capacity">Free time</a>
-  <a href="#s1">Semester 1</a>
-  <a href="#breaks">Exams and breaks</a>
-  <a href="#s2">Semester 2</a>
-  <a href="#notes">Notes</a>
+  <a href="index.html" class="nav-logo" title="Back to portfolio" aria-label="Back to portfolio">MA</a>
+  <div class="nav-tabs">
+    <a href="#goals">Goals</a>
+    <a href="#rhythm">Rhythm</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#capacity">Free time</a>
+    <a href="#s1">Semester 1</a>
+    <a href="#breaks">Exams and breaks</a>
+    <a href="#s2">Semester 2</a>
+    <a href="#notes">Notes</a>
+  </div>
 </nav>
 
 <main class="wrap">
