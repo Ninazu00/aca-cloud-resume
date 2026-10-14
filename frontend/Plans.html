@@ -74,7 +74,7 @@
           <p class="sub" id="m-dates">September 2026 to July 2027</p>
           <p class="sub" id="m-prog">Networks and Cybersecurity, Degree Year Three</p>
           <p class="ver" id="m-ver">
-            Version 7, Thursday off and IP Protocol on Wednesday added, updated 14 Oct 2026
+            Version 8, graduation project milestones added, updated 14 Oct 2026
           </p>
         </div>
       </div>
@@ -223,6 +223,30 @@
               </div>
             </div>
           </div>
+          <h3>Graduation project milestones</h3>
+          <div class="card">
+            <div class="scroll">
+              <table>
+                <thead>
+                  <tr><th>Semester</th><th>Week</th><th>What</th><th>Weight</th><th>Template</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>S1</td><td>Weeks 1–3</td><td>Find an idea and a supervisor</td><td>–</td><td>–</td></tr>
+                  <tr><td>S1</td><td>Week 4</td><td>Finalize the idea with the supervisor (proposal)</td><td>–</td><td>–</td></tr>
+                  <tr><td>S1</td><td>Week 5 (17–22 Oct)</td><td><b>Proposal submission</b>, signed by your supervisor</td><td>0%</td><td>GP-proposal Form 2026-2027</td></tr>
+                  <tr><td>S1</td><td>Week 6</td><td>Supervisors assigned to anyone who has none</td><td>–</td><td>–</td></tr>
+                  <tr><td>S1</td><td>Week 10 (21–26 Nov)</td><td><b>Interim report submission</b>, including the Turnitin report</td><td>10% (shared with the interim presentation)</td><td>Interim Template 2026-2027</td></tr>
+                  <tr><td>S2</td><td>Weeks 1–2 (6–18 Feb)</td><td><b>Evaluated interim presentation</b> by the supervisor and an examiner</td><td>part of the 10%</td><td>GP Interim-Presentation template 2026-2027</td></tr>
+                  <tr><td>S2</td><td>12–23 Jun</td><td><b>Submission</b> of the graduation project and dissertation</td><td>70%</td><td>Final Dissertation Template 2026-2027</td></tr>
+                  <tr><td>S2</td><td>12–23 Jun</td><td><b>Presentation and viva</b></td><td>20%</td><td>GP final-Presentation template 2026-2027</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small muted" style="margin-top:.8rem">
+              Weeks are teaching weeks. BUE says the exact dates will be announced through e-learning and email, so
+              the dates in brackets come from this plan's week numbering. The three submissions are the ones in red on BUE's timeline.
+            </p>
+          </div>
           <h3>Everything else</h3>
           <div class="card">
             <div class="scroll">
@@ -250,8 +274,8 @@
               </table>
             </div>
             <p class="small muted" style="margin-top:.8rem">
-              Coursework and grad-project deadlines beyond the submission window above aren’t on BUE’s calendar
-              yet — they’ll get added here once published.
+              Coursework deadlines aren’t on BUE’s calendar yet — they’ll get added here once published.
+              Exact grad-project dates are in the milestones table above.
             </p>
           </div>
         </div>
@@ -885,7 +909,14 @@
               <!-- Category: Grad project -->
               <div class="cat">
                 <div class="cat-h"><span class="cat-name">Grad project</span><span class="cat-hours">5h</span></div>
-                <p class="focus">Lock final scope and tech stack</p>
+                <p class="focus">Submit the signed proposal, lock final scope and tech stack</p>
+                <label class="task"
+                  ><input type="checkbox"
+                          data-key="w5|Grad project|Submit the signed GP-proposal form 2026-2027 (due this week; tick if already done)"
+                          data-h="0.5"
+                  ><span class="t">Submit the signed GP-proposal form 2026-2027 (due this week; tick if already done)</span
+                  ><span class="h">0.5h</span
+                ></label>
                 <label class="task"
                   ><input type="checkbox"
                           data-key="w5|Grad project|Compare 2–3 candidate tech stacks or tools for feasibility"
@@ -903,9 +934,9 @@
                 <label class="task"
                   ><input type="checkbox"
                           data-key="w5|Grad project|Write the locked-scope doc (what is in and out)"
-                          data-h="1.5"
+                          data-h="1"
                   ><span class="t">Write the locked-scope doc (what is in and out)</span
-                  ><span class="h">1.5h</span
+                  ><span class="h">1h</span
                 ></label>
               </div>
               <!-- Category: AWS Security -->
@@ -1388,34 +1419,48 @@
                   ><span class="cat-name">Grad project</span
                   ><span class="cat-hours">5.5h<span class="was"> (was 6h)</span></span
                 ></div>
-                <p class="focus">Integrate the automation script if relevant</p>
-                <p class="why">Overhead trim.</p>
+                <p class="focus">Interim report due this week, including the Turnitin report</p>
+                <p class="why">Replaces the old script-integration tasks, which went away with the scripting track. Exact due date comes from BUE.</p>
                 <label class="task"
                   ><input type="checkbox"
-                          data-key="w10|Grad project|Review this week's scripting output for reuse potential"
+                          data-key="w10|Grad project|Read the Interim Template 2026-2027 and outline the report"
                           data-h="0.5"
-                  ><span class="t">Review this week's scripting output for reuse potential</span
+                  ><span class="t">Read the Interim Template 2026-2027 and outline the report</span
                   ><span class="h">0.5h</span
                 ></label>
                 <label class="task"
                   ><input type="checkbox"
-                          data-key="w10|Grad project|Adapt and integrate the script into the grad project codebase"
-                          data-h="3"
-                  ><span class="t">Adapt and integrate the script into the grad project codebase</span
-                  ><span class="h">3h</span
-                ></label>
-                <label class="task"
-                  ><input type="checkbox"
-                          data-key="w10|Grad project|Test the integrated version"
+                          data-key="w10|Grad project|Write background, objectives and design from the proposal"
                           data-h="1.5"
-                  ><span class="t">Test the integrated version</span
+                  ><span class="t">Write background, objectives and design from the proposal</span
                   ><span class="h">1.5h</span
                 ></label>
                 <label class="task"
                   ><input type="checkbox"
-                          data-key="w10|Grad project|Commit and a brief dev log note"
+                          data-key="w10|Grad project|Write progress so far: what is built, results and screenshots"
+                          data-h="1.5"
+                  ><span class="t">Write progress so far: what is built, results and screenshots</span
+                  ><span class="h">1.5h</span
+                ></label>
+                <label class="task"
+                  ><input type="checkbox"
+                          data-key="w10|Grad project|Write remaining work and the Semester 2 timeline"
                           data-h="0.5"
-                  ><span class="t">Commit and a brief dev log note</span
+                  ><span class="t">Write remaining work and the Semester 2 timeline</span
+                  ><span class="h">0.5h</span
+                ></label>
+                <label class="task"
+                  ><input type="checkbox"
+                          data-key="w10|Grad project|Proofread, run the Turnitin check, fix flagged passages"
+                          data-h="1"
+                  ><span class="t">Proofread, run the Turnitin check, fix flagged passages</span
+                  ><span class="h">1h</span
+                ></label>
+                <label class="task"
+                  ><input type="checkbox"
+                          data-key="w10|Grad project|Submit the report with its Turnitin report attached"
+                          data-h="0.5"
+                  ><span class="t">Submit the report with its Turnitin report attached</span
                   ><span class="h">0.5h</span
                 ></label>
               </div>
@@ -1740,7 +1785,7 @@
             <!-- Category: Grad project -->
             <div class="cat">
               <div class="cat-h"><span class="cat-name">Grad project</span><span class="cat-hours">8h</span></div>
-              <p class="focus">Full status review and task list for Semester 2</p>
+              <p class="focus">Status review, task list for Semester 2, and the interim presentation</p>
               <label class="task"
                 ><input type="checkbox"
                         data-key="brk3|Grad project|Audit what is built against the original spec"
@@ -1764,10 +1809,17 @@
               ></label>
               <label class="task"
                 ><input type="checkbox"
-                        data-key="brk3|Grad project|Update project documentation and README to match current state"
-                        data-h="3"
-                ><span class="t">Update project documentation and README to match current state</span
-                ><span class="h">3h</span
+                        data-key="brk3|Grad project|Build the interim presentation from the GP Interim-Presentation template 2026-2027"
+                        data-h="2"
+                ><span class="t">Build the interim presentation from the GP Interim-Presentation template 2026-2027</span
+                ><span class="h">2h</span
+              ></label>
+              <label class="task"
+                ><input type="checkbox"
+                        data-key="brk3|Grad project|Rehearse it once against a timer"
+                        data-h="1"
+                ><span class="t">Rehearse it once against a timer</span
+                ><span class="h">1h</span
               ></label>
             </div>
             <!-- Category: AWS Security -->
@@ -1859,6 +1911,11 @@
                 ><span class="t">Grad project: the remaining 15–20% (polish, testing, docs)</span
               ></label>
               <label class="task"
+              ><input type="checkbox"
+              data-key="s2|February|Grad project: evaluated interim presentation to the supervisor and an examiner (S2 Weeks 1–2, 6–18 Feb, date TBC)"
+              ><span class="t">Grad project: evaluated interim presentation to the supervisor and an examiner (S2 Weeks 1–2, 6–18 Feb, date TBC)</span
+              ></label>
+              <label class="task"
                 ><input type="checkbox"
                         data-key="s2|February|Confirm S2 modules and timetable, settle into the new rhythm"
                 ><span class="t">Confirm S2 modules and timetable, settle into the new rhythm</span
@@ -1876,9 +1933,9 @@
               <h4>Week by week</h4>
               <ul class="dia">
                 <li>
-                  6–11 Feb: confirm S2 timetable, resume grad project polish; AWS: Domain 4 IAM review (6h)
+                  6–11 Feb: confirm S2 timetable, resume grad project polish, interim presentation window opens (date TBC); AWS: Domain 4 IAM review (6h)
                 </li>
-                <li>13–18 Feb: grad project testing and docs; AWS: Domain 5 data protection review (6h)</li>
+                <li>13–18 Feb: grad project testing and docs, interim presentation done by 18 Feb; AWS: Domain 5 data protection review (6h)</li>
                 <li>
                   20–25 Feb: fix remaining grad project bugs and features; AWS: Domains 1 and 2 review (6h)
                 </li>
@@ -1965,13 +2022,18 @@
                 ><span class="t">Grad project fully finalized and ready for the submission window (12–23 Jun)</span
               ></label>
               <label class="task"
+              ><input type="checkbox"
+              data-key="s2|May|Draft the final presentation (GP final-Presentation template 2026-2027) so June is only rehearsal"
+              ><span class="t">Draft the final presentation (GP final-Presentation template 2026-2027) so June is only rehearsal</span
+              ></label>
+              <label class="task"
                 ><input type="checkbox"
                         data-key="s2|May|Shift focus to final exam revision as exams approach (from 22 May)"
                 ><span class="t">Shift focus to final exam revision as exams approach (from 22 May)</span
               ></label>
               <h4>Week by week</h4>
               <ul class="dia">
-                <li>1–6 May: grad project final polish</li>
+                <li>1–6 May: grad project final polish, draft the final presentation</li>
                 <li>8–13 May (last teaching week): wrap up coursework</li>
                 <li>15–21 May (pre-exam revision): taper grad project, focus on final exam revision</li>
                 <li>22–31 May (exams): sit finals, lifestyle items light</li>
@@ -1990,8 +2052,8 @@
               ></label>
               <label class="task"
                 ><input type="checkbox"
-                        data-key="s2|June|Submit the grad project and prep the discussion or defense (12–23 Jun)"
-                ><span class="t">Submit the grad project and prep the discussion or defense (12–23 Jun)</span
+                        data-key="s2|June|Submit the project and dissertation, give the final presentation and viva (all inside 12–23 Jun, dates TBC)"
+                ><span class="t">Submit the project and dissertation, give the final presentation and viva (all inside 12–23 Jun, dates TBC)</span
               ></label>
               <label class="task"
                 ><input type="checkbox"
@@ -2001,7 +2063,7 @@
               <h4>Week by week</h4>
               <ul class="dia">
                 <li>1–10 Jun: remaining exams</li>
-                <li>12–17 Jun: grad project submission, defense prep and discussions, mark entry period</li>
+                <li>12–17 Jun: grad project and dissertation submission, final presentation and viva (inside 12–23 Jun), mark entry period</li>
                 <li>19–24 Jun: grad project loose ends (AMC and IP-EC panels if needed)</li>
               </ul>
             </div>
