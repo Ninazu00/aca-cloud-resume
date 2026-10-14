@@ -909,7 +909,8 @@ html.page-plans {
 .page-plans .wk-stats b{font-size:1.05rem;color:var(--ink)}
 .page-plans .wk-done{color:var(--gold-text);font-weight:600}
 .page-plans .bar{grid-column:1/-1;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);position:relative}
-.page-plans .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--gold)}
+.page-plans .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--gold);transition:width .35s ease}
+@media (prefers-reduced-motion:reduce){.page-plans .bar i{transition:none}}
 .page-plans details.week>summary::after{content:none}
 .page-plans details.week[open]>summary{border-bottom:1px solid var(--rule)}
 .page-plans .wk-body{padding:.2rem 0 .4rem}

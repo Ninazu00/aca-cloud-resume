@@ -32,8 +32,11 @@
     2. the week header: planned = sum of every data-h in the week
                         free    = pool - planned
                         avg/day = planned / 6  and  free / 6
-                        bar     = planned / pool * 100  (the width % on the bar)
     3. the same week's row in the "At a glance" table in Semester 1
+  THE PROGRESS BAR in each week header fills automatically: ticked hours divided
+  by the week's total hours (the sum of every data-h in that week). It starts at
+  width:0% in the HTML and the script updates it, so you never edit it by hand.
+
   Pool is 45h in a normal teaching week from Week 5 (43.5h in Weeks 2-4).
 
   TIMETABLE GRID: an event is placed with inline CSS.
@@ -706,7 +709,7 @@
               ><span class="wk-n">02</span
               ><span class="wk-m"><span class="wk-d">26 Sep – 1 Oct</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>36.5h free</b><span>7h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:16.092%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 1.2h of work, 6.1h free. Pool this week: 43.5h.</p>
@@ -756,7 +759,7 @@
               ><span class="wk-n">03</span
               ><span class="wk-m"><span class="wk-d">3–8 Oct</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>34.5h free</b><span>9h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:20.69%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 1.5h of work, 5.8h free. Pool this week: 43.5h.</p>
@@ -811,7 +814,7 @@
               ><span class="wk-n">04</span
               ><span class="wk-m"><span class="wk-d">10–15 Oct</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>34.5h free</b><span>9h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:20.69%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 1.5h of work, 5.8h free. Pool this week: 43.5h.</p>
@@ -866,7 +869,7 @@
               ><span class="wk-n">05</span
               ><span class="wk-m"><span class="wk-d">17–22 Oct</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>25h free</b><span>20h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:44.444%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.3h of work, 4.2h free. Pool this week: 45h.</p>
@@ -968,7 +971,7 @@
               ><span class="wk-n">06</span
               ><span class="wk-m"><span class="wk-d">24–29 Oct</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>24h free</b><span>21h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:46.667%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.5h of work, 4h free. Pool this week: 45h.</p>
@@ -1070,7 +1073,7 @@
               ><span class="wk-n">07</span
               ><span class="wk-m"><span class="wk-d">31 Oct – 5 Nov</span><span class="wk-tag">Mid-semester reading week</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>37.5h free</b><span>32.5h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:46.429%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 5.4h of work, 6.2h free. Pool this week: 70h.</p>
@@ -1179,7 +1182,7 @@
               ><span class="wk-n">08</span
               ><span class="wk-m"><span class="wk-d">7–12 Nov</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>24.5h free</b><span>20.5h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:45.556%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.4h of work, 4.1h free. Pool this week: 45h.</p>
@@ -1269,7 +1272,7 @@
               ><span class="wk-n">09</span
               ><span class="wk-m"><span class="wk-d">14–19 Nov</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>23.5h free</b><span>21.5h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:47.778%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.6h of work, 3.9h free. Pool this week: 45h.</p>
@@ -1366,7 +1369,7 @@
               ><span class="wk-n">10</span
               ><span class="wk-m"><span class="wk-d">21–26 Nov</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>24.5h free</b><span>20.5h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:45.556%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.4h of work, 4.1h free. Pool this week: 45h.</p>
@@ -1458,7 +1461,7 @@
               ><span class="wk-n">11</span
               ><span class="wk-m"><span class="wk-d">28 Nov – 3 Dec</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>22h free</b><span>23h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:51.111%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.8h of work, 3.7h free. Pool this week: 45h.</p>
@@ -1546,7 +1549,7 @@
               ><span class="wk-n">12</span
               ><span class="wk-m"><span class="wk-d">5–10 Dec</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>22h free</b><span>23h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:51.111%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 3.8h of work, 3.7h free. Pool this week: 45h.</p>
@@ -1635,7 +1638,7 @@
               ><span class="wk-n">13</span
               ><span class="wk-m"><span class="wk-d">12–17 Dec</span><span class="wk-tag">Revision week</span><span class="wk-now" hidden>This week</span></span
               ><span class="wk-stats"><b>25h free</b><span>45h planned</span><span class="wk-done"></span></span
-              ><span class="bar"><i style="width:64.286%"></i></span
+              ><span class="bar" role="progressbar" aria-label="Tasks completed this week" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span
             ></summary>
             <div class="wk-body">
               <p class="wk-avg">Average per day: 7.5h of work, 4.2h free. Pool this week: 70h.</p>
@@ -2105,7 +2108,7 @@
    PAGE SCRIPT - optional extras only. All content above works without it.
    What it does:
      1. Remembers ticked tasks in this browser (localStorage, key prefix "sy26:")
-     2. Shows "done Xh" in each week header from the ticked tasks' data-h
+     2. Shows "done Xh" and fills the week's progress bar from the ticked tasks' data-h
      3. Opens the week that contains today's date (uses details[data-start])
      4. Wires the "Open all" / "Close all" buttons in Semester 1
      5. Wires the "Clear all ticks" button (tap twice to confirm)
@@ -2131,15 +2134,28 @@
     } catch (e) { /* storage blocked: ticks just will not persist */ }
   }
 
-  /* ---- 2. "done Xh" counter ------------------------------------------------ */
+  /* ---- 2. "done Xh" counter and progress bar ------------------------------ */
   function updateDoneHours(detailsEl) {
-    var hours = 0;
-    detailsEl.querySelectorAll("input:checked").forEach(function (box) {
-      hours += Number(box.dataset.h || 0);
+    var doneHours = 0;
+    var totalHours = 0;
+    detailsEl.querySelectorAll("input[data-h]").forEach(function (box) {
+      var h = Number(box.dataset.h || 0);
+      totalHours += h;
+      if (box.checked) { doneHours += h; }
     });
+
     var label = detailsEl.querySelector(".wk-done");
     if (label) {
-      label.textContent = hours ? "done " + (Math.round(hours * 100) / 100) + "h" : "";
+      label.textContent = doneHours ? "done " + (Math.round(doneHours * 100) / 100) + "h" : "";
+    }
+
+    /* Progress bar: width = ticked hours / total hours of the week */
+    var bar = detailsEl.querySelector(".bar");
+    if (bar) {
+      var percent = totalHours ? Math.round((doneHours / totalHours) * 1000) / 10 : 0;
+      var fill = bar.querySelector("i");
+      if (fill) { fill.style.width = percent + "%"; }
+      bar.setAttribute("aria-valuenow", Math.round(percent));
     }
   }
 
